@@ -1,7 +1,7 @@
 # nativescript-braze
 
 NOTE: Not all functions have been implemented yet. Feel free to contribute.
-This plugin is based on the [appboy-react-sdk](https://github.com/Appboy/appboy-react-sdk)
+This plugin is based on the [appboy-react-sdk](https://github.com/Appboy/appboy-react-sdk).
 
 ## SDK Integration
 
@@ -19,8 +19,6 @@ npm install
 ```
 
 ### iOS
-Our sample app integrates the native Braze iOS SDK through [Cocoapods](https://guides.cocoapods.org/using/getting-started.html).
-
 From the `demo-angular` directory:
 ```
 tns run ios
