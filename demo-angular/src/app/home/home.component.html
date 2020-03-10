@@ -1,0 +1,17 @@
+<ActionBar>
+    <Label text="Braze"></Label>
+</ActionBar>
+
+<ScrollView>
+    <StackLayout>
+        <TextField [text]='deviceId' hint="Device Id"></TextField>
+        <Button (tap)="onGetDeviceId()" text="Get DeviceId"></Button>
+        <TextField [text]='userId' hint="User Id"></TextField>
+        <Button (tap)="onChangeUser()" text="Change User"></Button>
+        <TextField [text]='eventName' hint="Event Name"></TextField>
+        <Button (tap)="onLogCustomEvent()" text="Log Custom Event"></Button>
+        <Button (tap)="onNewsFeedRefresh()" text="Refresh news feed"></Button>
+        <Button (tap)="onLaunchNewsFeed()" text="Launch feed modal"></Button>
+        <Button (tap)="onLaunchContentCards()" text="Launch Content cards"></Button>
+    </StackLayout>
+</ScrollView>
