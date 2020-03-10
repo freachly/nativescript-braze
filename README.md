@@ -1,5 +1,7 @@
 # nativescript-braze
 
+NOTE: Not all functions have been implemented yet. Feel free to contribute.
+This plugin is based on the [appboy-react-sdk](https://github.com/Appboy/appboy-react-sdk)
 
 ## SDK Integration
 
