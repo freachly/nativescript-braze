@@ -37,10 +37,10 @@
         "email": "timo.klein@yfreachly.com"
     },
     "bugs": {
-        "url": "https://github.com/YourName/nativescript-braze/issues"
+        "url": "https://github.com/freachly/nativescript-braze/issues"
     },
-    "license": "Apache-2.0",
-    "homepage": "https://github.com/YourName/nativescript-braze",
+    "license": "MIT",
+    "homepage": "https://github.com/freachly/nativescript-braze",
     "devDependencies": {
         "tns-core-modules": "^6.0.0",
         "tns-platform-declarations": "^6.0.0",
