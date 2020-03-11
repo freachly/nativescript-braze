@@ -160,7 +160,7 @@ export class Braze implements CommonBraze {
         quantity: number,
         purchaseProperties?: object
     ): void {
-        // TODO: Transform into enum
+         // TODO: Implement me
     }
 
     addToCustomAttributeArray(
@@ -171,7 +171,7 @@ export class Braze implements CommonBraze {
     }
 
     removeFromCustomUserAttributeArray() {
-        // TODO Implement
+        // TODO: Implement me
     }
 
     unsetCustomUserAttribute(key: string) {
@@ -188,7 +188,7 @@ export class Braze implements CommonBraze {
         statusesCount: number,
         profileImageUrl: string
     ) {
-        // TODO Implement
+        // TODO: Implement me
     }
 
     setFacebookData(
@@ -196,7 +196,7 @@ export class Braze implements CommonBraze {
         numberOfFriends: number,
         likes: Array<any>
     ) {
-        // TODO Implement
+        // TODO: Implement me
     }
 
     setAttributionData(
@@ -205,7 +205,7 @@ export class Braze implements CommonBraze {
         adGroup: string,
         creative: string
     ) {
-        // TODO Implement
+        // TODO: Implement me
     }
 
     launchNewsFeed(): void {

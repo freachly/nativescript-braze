@@ -19,7 +19,6 @@ export class Braze implements CommonBraze {
         return Braze.instance;
     }
 
-    // TODO: Fix the any on the appboyOptions parameter.
     startUp(apiKey: string, application: UIApplication, launchOptions: NSDictionary<any, any>, appboyOptions?: any): void {
         if (!appboyOptions) {
             Appboy.startWithApiKeyInApplicationWithLaunchOptions(apiKey, application, launchOptions);
@@ -39,7 +38,6 @@ export class Braze implements CommonBraze {
     }
 
     setSDKFlavor(): void {
-        // Use interface enum to know what 2 actually stands for
         this.appboy.sdkFlavor = 2;
     }
 
@@ -104,7 +102,6 @@ export class Braze implements CommonBraze {
         this.appboy.user.email = email;
     }
 
-    // TODO: finish implantation;
     setGender(gender: GenderTypes[keyof GenderTypes]): boolean {
         // TODO: Implement me
         return true;
@@ -134,13 +131,14 @@ export class Braze implements CommonBraze {
         // TODO: Implement me
     }
 
-    setPushNotificationSubscriptionType(notificationSubscriptionType: NotificationSubscriptionType[keyof NotificationSubscriptionType]) {
-        // TODO: Transform into enum
+    setPushNotificationSubscriptionType(notificationSubscriptionType: NotificationSubscriptionType[keyof NotificationSubscriptionType]): boolean {
+        // TODO: Implement me
         // return this.appboy.user.setPushNotificationSubscriptionType(notificationSubscriptionType);
+        return true;
     }
 
     setEmailNotificationSubscriptionType(notificationSubscriptionType: NotificationSubscriptionType[keyof NotificationSubscriptionType]): boolean {
-        // TODO: Transform into enum
+        // TODO: Implement me
         // return this.appboy.user.setEmailNotificationSubscriptionType(notificationSubscriptionType);
         return true;
     }
@@ -161,7 +159,7 @@ export class Braze implements CommonBraze {
         quantity: number,
         purchaseProperties?: object
     ): void {
-        // TODO: Transform into enum
+        // TODO: Implement me
     }
 
     addToCustomAttributeArray(
@@ -172,7 +170,7 @@ export class Braze implements CommonBraze {
     }
 
     removeFromCustomUserAttributeArray() {
-        // TODO Implement
+        // TODO: Implement me
     }
 
     unsetCustomUserAttribute(key: string) {
@@ -189,7 +187,7 @@ export class Braze implements CommonBraze {
         statusesCount: number,
         profileImageUrl: string
     ) {
-        // TODO Implement
+        // TODO: Implement me
     }
 
     setFacebookData(
@@ -197,7 +195,7 @@ export class Braze implements CommonBraze {
         numberOfFriends: number,
         likes: Array<any>
     ) {
-        // TODO Implement
+        // TODO: Implement me
     }
 
     setAttributionData(
@@ -206,7 +204,7 @@ export class Braze implements CommonBraze {
         adGroup: string,
         creative: string
     ) {
-        // TODO Implement
+        // TODO: Implement me
     }
 
     launchNewsFeed(): void {
@@ -260,7 +258,6 @@ export class Braze implements CommonBraze {
     getCardCountForCategories(
         category: BrazeCardCategory[keyof BrazeCardCategory]
     ): number {
-        // TODO: convert string to number
         // return this.appboy.feedController.cardCountForCategories(category);
         return 0;
     }
@@ -268,7 +265,6 @@ export class Braze implements CommonBraze {
     getUnreadCardCountForCategories(
         category: BrazeCardCategory[keyof BrazeCardCategory]
     ): number {
-        // TODO: convert string to number
         return this.appboy.feedController.unreadCardCountForCategories(category as any);
     }
 

@@ -383,7 +383,7 @@ export interface CommonBraze {
      */
     setPushNotificationSubscriptionType(
         notificationSubscriptionType: NotificationSubscriptionType[keyof NotificationSubscriptionType]
-    ): void;
+    ): boolean;
 
     /**
      * Sets whether the user should be sent email campaigns.
@@ -392,7 +392,7 @@ export interface CommonBraze {
      */
     setEmailNotificationSubscriptionType(
         notificationSubscriptionType: NotificationSubscriptionType[keyof NotificationSubscriptionType]
-    ): void;
+    ): boolean;
 
     /**
      * Reports that the current user performed a custom named event.
