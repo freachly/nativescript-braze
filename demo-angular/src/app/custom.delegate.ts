@@ -12,9 +12,9 @@ if (ios) {
                 [ABKEndpointKey]: 'sdk.fra-01.braze.eu'
             };
 
-            const apikey = '';
+            const apiKey = '';
 
-            Braze.getInstance().startUp(apikey, application, launchOptions, brazeAppboyOptions);
+            Braze.getInstance().startUp(apiKey, application, launchOptions, brazeAppboyOptions);
 
             const center = UNUserNotificationCenter.currentNotificationCenter();
             center.setNotificationCategories(ABKPushUtils.getAppboyUNNotificationCategorySet());

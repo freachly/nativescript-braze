@@ -1,20 +1,13 @@
-import { isIOS} from "tns-core-modules/platform";
+import { GenderTypes, NotificationSubscriptionType, MonthsAsNumber, BrazeCardCategory, CommonBraze } from './';
 
-import { ContentCard, GenderTypes, NotificationSubscriptionType, MonthsAsNumber, BrazeCardCategory, AppboyEvent } from './';
-import { Common } from './braze.common';
+declare const Appboy: any;
+declare const ABKNewsFeedViewController: any;
 
-declare var Appboy: any;
-declare var ABKNewsFeedViewController: any;
-declare var ABKNewsFeedViewController: any;
-
-export class Braze extends Common {
+export class Braze implements CommonBraze {
     private static instance: Braze = new Braze();
-    public appboy: Appboy = null;
-    private initialUrlString = null;
+    appboy: Appboy = null;
 
     constructor() {
-        super();
-
         if (Braze.instance) {
             throw new Error("Error: Instance failed: Use Braze.getInstance() instead of new.");
         }
@@ -37,15 +30,8 @@ export class Braze extends Common {
         this.appboy = Appboy.sharedInstance();
     }
 
-    registerApplicationDidReceiveRemoteNotificationFetchCompletionHandler(application: UIApplication, notification: NSDictionary<any, any>, completionHandler: any): void {
-        this.appboy.registerApplicationDidReceiveRemoteNotificationFetchCompletionHandler(application, notification, completionHandler);
-    }
-
-    getInitialURL(): string {
+    getInitialURL(): void {
         // TODO: Implement logic
-        if (this.initialUrlString) {
-            return '';
-        }
     }
 
     getInstallTrackingId(): string {
@@ -73,7 +59,7 @@ export class Braze extends Common {
         return;
     }
 
-    setCustomUserAttribute(key: string, value: any) {
+    setCustomUserAttribute(key: string, value: any): boolean | null {
         const valueType = typeof(value);
 
         if (value instanceof Date) {
@@ -91,6 +77,15 @@ export class Braze extends Common {
                 return this.appboy.user.setCustomAttributeWithKeyAndDoubleValue(key, value);
             }
         }
+
+        return null;
+    }
+
+    addToCustomUserAttributeArray(
+        key: string,
+        value: string
+    ): void {
+        this.appboy.user.addToCustomAttributeArrayWithKeyValue(key, value);
     }
 
     incrementCustomUserAttribute(key: string, incrementValue: number) {
@@ -121,6 +116,10 @@ export class Braze extends Common {
 
     setCountry(country: string): void {
         this.appboy.user.country = country;
+    }
+
+    setPhoneNumber(phoneNumber: string): void {
+        this.appboy.user.phone = phoneNumber;
     }
 
     setHomeCity(homeCity: string): void {

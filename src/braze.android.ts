@@ -1,20 +1,16 @@
-import { Common } from './braze.common';
 import { android as androidApp } from "tns-core-modules/application";
-import { GenderTypes, BrazeCardCategory, NotificationSubscriptionType } from '.';
+import { GenderTypes, BrazeCardCategory, NotificationSubscriptionType, CommonBraze } from '.';
 
 const Appboy = (com.appboy as any).Appboy;
 const Intent = android.content.Intent;
 const AppboyLocationService = (com.appboy as any).services.AppboyLocationService;
 const AppboyInAppMessageManager = (com.appboy as any).ui.inappmessage.AppboyInAppMessageManager;
-const Gender = (com.appboy as any).enums.Gender;
 const AppboyProperties = (com.appboy as any).models.outgoing.AppboyProperties;
 
-export class Braze extends Common {
+export class Braze implements CommonBraze {
     private static instance: Braze = new Braze();
 
     constructor() {
-        super();
-
         if (Braze.instance) {
             throw new Error("Error: Instance failed: Use Braze.getInstance() instead of new.");
         }
@@ -100,6 +96,10 @@ export class Braze extends Common {
         Appboy.getInstance(androidApp.context).getCurrentUser().setHomeCity(homeCity);
     }
 
+    setPhoneNumber(phoneNumber: string): void {
+        Appboy.getInstance(androidApp.context).getCurrentUser().setPhoneNumber(phoneNumber);
+    }
+
     setAvatarImageUrl(avatarImageUrl: string): void {
         Appboy.getInstance(androidApp.context).getCurrentUser().setAvatarImageUrl(avatarImageUrl)
     }
@@ -124,6 +124,13 @@ export class Braze extends Common {
         }
 
         return Appboy.getInstance(androidApp.context).getCurrentUser().setEmailNotificationSubscriptionType(notificationSubscriptionType);
+    }
+
+    addToCustomUserAttributeArray(
+        key: string,
+        value: string
+    ): void {
+        Appboy.getInstance(androidApp.context).getCurrentUser().addToCustomAttributeArray(key, value);
     }
 
     logCustomEvent(eventName: string, eventProperties?: object) {
@@ -236,9 +243,7 @@ export class Braze extends Common {
     }
 
     getContentCards(): void {
-        // getContentCards(): Promise<ContentCard[]> {
         // TODO: Implement me
-        // return new Promise();
     }
 
     getCardCountForCategories(
