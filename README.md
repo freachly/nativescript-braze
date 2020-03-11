@@ -4,8 +4,6 @@ NOTE: Not all functions have been implemented yet. Feel free to contribute.
 This plugin is based on the [appboy-react-sdk](https://github.com/Appboy/appboy-react-sdk).
 
 ## SDK Integration
-
-See our Technical Documentation for instructions on integrating Braze into your React Native application.
 - [iOS Documentation](https://www.braze.com/documentation/React_Native/iOS/)
 - [Android Documentation](https://www.braze.com/documentation/React_Native/Android_and_FireOS/)
 
