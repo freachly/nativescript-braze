@@ -334,7 +334,10 @@ export class Braze implements CommonBraze {
         this.appboy.inAppMessageController.inAppMessageUIController.hideCurrentInAppMessage(true);
     }
 
-    addListener(event: AppboyEvent[keyof AppboyEvent], subscriber: (notification: any) => string): any {
+    addListener(
+        event: AppboyEvent[keyof AppboyEvent],
+        subscriber: (notification: any) => string
+    ): any {
         let notificationName;
         switch (event) {
             case AppboyEvent.CONTENT_CARDS_UPDATED:
