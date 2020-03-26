@@ -1,4 +1,8 @@
-import { GenderTypes, NotificationSubscriptionType, MonthsAsNumber, BrazeCardCategory, CommonBraze } from './';
+import {
+    BrazeCardCategory, GenderTypes, NotificationSubscriptionType, AppboyEvent,
+    ContentCardType, MonthsAsNumber, CommonBraze
+} from './';
+import { ios } from 'tns-core-modules/application/application';
 
 declare const Appboy: any;
 declare const ABKNewsFeedViewController: any;
@@ -255,17 +259,42 @@ export class Braze implements CommonBraze {
         // return new Promise();
     }
 
+    private getCardCategoryForString(category:  BrazeCardCategory[keyof BrazeCardCategory]) {
+        let cardCategory: ABKCardCategory;
+        switch (category) {
+            case BrazeCardCategory.ADVERTISING:
+                cardCategory = ABKCardCategory.Advertising;
+                break;
+            case BrazeCardCategory.ANNOUNCEMENTS:
+                cardCategory = ABKCardCategory.Announcements;
+                break;
+            case BrazeCardCategory.NEWS:
+                cardCategory = ABKCardCategory.News;
+                break;
+            case BrazeCardCategory.SOCIAL:
+                cardCategory = ABKCardCategory.Social;
+                break;
+            case BrazeCardCategory.NO_CATEGORY:
+                cardCategory = ABKCardCategory.NoCategory;
+                break;
+            case BrazeCardCategory.ALL:
+            default:
+                cardCategory = ABKCardCategory.All;
+                break;
+        }
+        return cardCategory;
+    }
+
     getCardCountForCategories(
-        category: BrazeCardCategory[keyof BrazeCardCategory]
+        category: BrazeCardCategory[keyof BrazeCardCategory] = BrazeCardCategory.ALL
     ): number {
-        // return this.appboy.feedController.cardCountForCategories(category);
-        return 0;
+        return this.appboy.feedController.cardCountForCategories(this.getCardCategoryForString(category));
     }
 
     getUnreadCardCountForCategories(
-        category: BrazeCardCategory[keyof BrazeCardCategory]
+        category: BrazeCardCategory[keyof BrazeCardCategory] = BrazeCardCategory.ALL
     ): number {
-        return this.appboy.feedController.unreadCardCountForCategories(category as any);
+        return this.appboy.feedController.unreadCardCountForCategories(this.getCardCategoryForString(category));
     }
 
     requestFeedRefresh(): void {
@@ -304,8 +333,17 @@ export class Braze implements CommonBraze {
     hideCurrentInAppMessage(): void {
         this.appboy.inAppMessageController.inAppMessageUIController.hideCurrentInAppMessage(true);
     }
-    
-    // addListener(event: AppboyEvent[keyof AppboyEvent], subscriber: Function): EmitterSubscription {
-        // TODO: Check how this can be implemented. Maybe look at the web version??
-    // }
+
+    addListener(event: AppboyEvent[keyof AppboyEvent], subscriber: (notification: any) => string): any {
+        let notificationName;
+        switch (event) {
+            case AppboyEvent.CONTENT_CARDS_UPDATED:
+                notificationName = ABKContentCardsProcessedNotification;
+                break;
+            default:
+                notificationName = event as string;
+                break;
+        }
+        return ios.addNotificationObserver(notificationName, subscriber);
+    }
 }
