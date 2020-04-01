@@ -2,11 +2,12 @@ import { android as androidApp } from "tns-core-modules/application";
 import { GenderTypes, BrazeCardCategory, NotificationSubscriptionType, CommonBraze, AppboyEvent } from '.';
 
 const Appboy = (com.appboy as any).Appboy;
-const Events = (com.appboy as any).Appboy;
+const Events = (com.appboy as any).Appboy.events;
 const Intent = android.content.Intent;
 const AppboyLocationService = (com.appboy as any).services.AppboyLocationService;
 const AppboyInAppMessageManager = (com.appboy as any).ui.inappmessage.AppboyInAppMessageManager;
 const AppboyProperties = (com.appboy as any).models.outgoing.AppboyProperties;
+const AppboyContentCardsFragment = (com.appboy as any).ui.AppboyContentCardsFragment;
 
 export class Braze implements CommonBraze {
     private static instance: Braze = new Braze();
@@ -247,7 +248,7 @@ export class Braze implements CommonBraze {
         // TODO: Implement me
     }
 
-    private getCardCategoryForString(category: BrazeCardCategory) {
+    getCardCategoryForString(category?: BrazeCardCategory): string {
         if (!category) {
             return 'ALL';
         }
@@ -273,7 +274,7 @@ export class Braze implements CommonBraze {
         // return Events.FeedUpdatedEvent.getContentCardUnviewedCount(
         //     this.getCardCategoryForString(category as BrazeCardCategory)
         // );
-        return Appboy.getInstance(androidApp.context).getContentCardCount();
+        return Appboy.getInstance(androidApp.context).getContentCardUnviewedCount();
     }
 
     requestFeedRefresh(): void {
@@ -314,7 +315,7 @@ export class Braze implements CommonBraze {
 
     addListener(
         event: AppboyEvent[keyof AppboyEvent],
-        subscriber: (notification: any) => string
+        subscriber: (notification: any) => any
     ): any {
         let notificationName;
         switch (event) {
@@ -325,8 +326,6 @@ export class Braze implements CommonBraze {
                 notificationName = event as string;
                 break;
         }
-        return Appboy.getInstance(androidApp.context).subscribeToContentCardsUpdates(new Events.IEventSubscriber({
-            trigger: subscriber
-        }));
+        // TODO: Add listener
     }
 }

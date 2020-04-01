@@ -595,6 +595,11 @@ export interface CommonBraze {
     getContentCards(): void;
 
     /**
+     * Returns the device-specific card category for a given BrazeCardCategory enum value.
+     */
+    getCardCategoryForString(category?: BrazeCardCategory[keyof BrazeCardCategory]): any;
+
+    /**
      * Returns the current number of News Feed cards for the given category.
      * @param {BrazeCardCategory} category - Card category.
      * Note that for Android, a successful result relies on a FeedUpdatedEvent being posted at least once.
@@ -674,6 +679,6 @@ export interface CommonBraze {
      */
     addListener(
         event: BrazeCardCategory[keyof BrazeCardCategory],
-        subscriber: (notification: any) => string
+        subscriber: (notification: any) => any
     ): any;
 }

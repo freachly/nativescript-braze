@@ -259,7 +259,7 @@ export class Braze implements CommonBraze {
         // return new Promise();
     }
 
-    private getCardCategoryForString(category:  BrazeCardCategory[keyof BrazeCardCategory]) {
+    getCardCategoryForString(category?: BrazeCardCategory[keyof BrazeCardCategory]): ABKCardCategory {
         let cardCategory: ABKCardCategory;
         switch (category) {
             case BrazeCardCategory.ADVERTISING:
@@ -336,7 +336,7 @@ export class Braze implements CommonBraze {
 
     addListener(
         event: AppboyEvent[keyof AppboyEvent],
-        subscriber: (notification: any) => string
+        subscriber: (notification: any) => any
     ): any {
         let notificationName;
         switch (event) {
