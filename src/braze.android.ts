@@ -253,7 +253,7 @@ export class Braze implements CommonBraze {
             return 'ALL';
         }
         return category.toUpperCase();
-      }
+    }
 
     getCardCountForCategories(
         category: BrazeCardCategory[keyof BrazeCardCategory] = BrazeCardCategory.ALL
