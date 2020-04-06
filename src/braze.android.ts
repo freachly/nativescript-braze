@@ -1,11 +1,13 @@
 import { android as androidApp } from "tns-core-modules/application";
-import { GenderTypes, BrazeCardCategory, NotificationSubscriptionType, CommonBraze } from '.';
+import { GenderTypes, BrazeCardCategory, NotificationSubscriptionType, CommonBraze, AppboyEvent } from '.';
 
 const Appboy = (com.appboy as any).Appboy;
+const Events = (com.appboy as any).Appboy.events;
 const Intent = android.content.Intent;
 const AppboyLocationService = (com.appboy as any).services.AppboyLocationService;
 const AppboyInAppMessageManager = (com.appboy as any).ui.inappmessage.AppboyInAppMessageManager;
 const AppboyProperties = (com.appboy as any).models.outgoing.AppboyProperties;
+const AppboyContentCardsFragment = (com.appboy as any).ui.AppboyContentCardsFragment;
 
 export class Braze implements CommonBraze {
     private static instance: Braze = new Braze();
@@ -246,22 +248,37 @@ export class Braze implements CommonBraze {
         // TODO: Implement me
     }
 
+    getCardCategoryForString(category?: BrazeCardCategory): string {
+        if (!category) {
+            return 'ALL';
+        }
+        return category.toUpperCase();
+    }
+
     getCardCountForCategories(
-        category: BrazeCardCategory[keyof BrazeCardCategory]
+        category: BrazeCardCategory[keyof BrazeCardCategory] = BrazeCardCategory.ALL
     ): number {
-        // TODO: Implement me
-        return 0;
+        // TODO: get by category
+
+        // return Events.FeedUpdatedEvent.getContentCardCount(
+        //     this.getCardCategoryForString(category as BrazeCardCategory)
+        // );
+        return Appboy.getInstance(androidApp.context).getContentCardCount();
     }
 
     getUnreadCardCountForCategories(
-        category: BrazeCardCategory[keyof BrazeCardCategory]
+        category: BrazeCardCategory[keyof BrazeCardCategory] = BrazeCardCategory.ALL
     ): number {
-        // TODO: Implement me
-        return 0;
+        // TODO: get by category
+
+        // return Events.FeedUpdatedEvent.getContentCardUnviewedCount(
+        //     this.getCardCategoryForString(category as BrazeCardCategory)
+        // );
+        return Appboy.getInstance(androidApp.context).getContentCardUnviewedCount();
     }
 
     requestFeedRefresh(): void {
-        Appboy.getInstance(androidApp.context).requestFeedRefresh()
+        Appboy.getInstance(androidApp.context).requestFeedRefresh();
     }
 
     requestImmediateDataFlush(): void {
@@ -294,5 +311,21 @@ export class Braze implements CommonBraze {
 
     hideCurrentInAppMessage(): void {
         AppboyInAppMessageManager.getInstance().hideCurrentlyDisplayingInAppMessage(true);
+    }
+
+    addListener(
+        event: AppboyEvent[keyof AppboyEvent],
+        subscriber: (notification: any) => any
+    ): any {
+        let notificationName;
+        switch (event) {
+            case AppboyEvent.CONTENT_CARDS_UPDATED:
+                notificationName = Events.ContentCardsUpdatedEvent;
+                break;
+            default:
+                notificationName = event as string;
+                break;
+        }
+        // TODO: Add listener
     }
 }

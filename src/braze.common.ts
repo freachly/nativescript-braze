@@ -1,6 +1,6 @@
 export type MonthsAsNumber = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12;
 
-export enum BrazeCardCategory {
+export const enum BrazeCardCategory {
     'ADVERTISING' = 'advertising',
     'ANNOUNCEMENTS' = 'announcements',
     'NEWS' = 'news',
@@ -9,7 +9,7 @@ export enum BrazeCardCategory {
     'ALL' = 'all'
 }
 
-export enum GenderTypes {
+export const enum GenderTypes {
     'FEMALE' = 'f',
     'MALE' = 'm',
     'NOT_APPLICABLE' = 'n',
@@ -18,17 +18,17 @@ export enum GenderTypes {
     'UNKNOWN' = 'u'
 }
 
-export enum NotificationSubscriptionType {
+export const enum NotificationSubscriptionType {
     'OPTED_IN' = 'optedin',
     'SUBSCRIBED' = 'subscribed',
     'UNSUBSCRIBED' = 'unsubscribed'
 }
 
-export enum AppboyEvent {
+export const enum AppboyEvent {
     'CONTENT_CARDS_UPDATED' = 'contentCardsUpdated'
 }
 
-export enum ContentCardType {
+export const enum ContentCardType {
     'CLASSIC' = 'Classic',
     'BANNER' = 'Banner',
     'CAPTIONED' = 'Captioned'
@@ -595,6 +595,11 @@ export interface CommonBraze {
     getContentCards(): void;
 
     /**
+     * Returns the device-specific card category for a given BrazeCardCategory enum value.
+     */
+    getCardCategoryForString(category?: BrazeCardCategory[keyof BrazeCardCategory]): any;
+
+    /**
      * Returns the current number of News Feed cards for the given category.
      * @param {BrazeCardCategory} category - Card category.
      * Note that for Android, a successful result relies on a FeedUpdatedEvent being posted at least once.
@@ -602,7 +607,7 @@ export interface CommonBraze {
      * which requests a feed refresh, so the counts may not always be accurate.
      */
     getCardCountForCategories(
-        category: BrazeCardCategory[keyof BrazeCardCategory]
+        category?: BrazeCardCategory[keyof BrazeCardCategory]
     ): void;
 
     /**
@@ -613,7 +618,7 @@ export interface CommonBraze {
      * which requests a feed refresh, so the counts may not always be accurate.
      */
     getUnreadCardCountForCategories(
-        category: BrazeCardCategory[keyof BrazeCardCategory]
+        category?: BrazeCardCategory[keyof BrazeCardCategory]
     ): number;
 
     /**
@@ -666,4 +671,14 @@ export interface CommonBraze {
      * Dismisses the currently displayed in app message.
      */
     hideCurrentInAppMessage(): void;
+
+    /**
+     * Subscribes to the specific SDK event.
+     * @param {AppboyEvent} event
+     * @param {function} subscriber
+     */
+    addListener(
+        event: BrazeCardCategory[keyof BrazeCardCategory],
+        subscriber: (notification: any) => any
+    ): any;
 }
