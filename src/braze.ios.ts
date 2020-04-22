@@ -223,7 +223,7 @@ export class Braze implements CommonBraze {
     }
 
     launchContentCards(): void {
-        const contentCardsModal = ABKNewsFeedViewController.alloc().init();
+        const contentCardsModal = ABKContentCardsViewController.alloc().init();
         // TODO: check why this does not work
         contentCardsModal.navigationItem.title = 'Content Cards';
 
@@ -342,6 +342,9 @@ export class Braze implements CommonBraze {
         switch (event) {
             case AppboyEvent.CONTENT_CARDS_UPDATED:
                 notificationName = ABKContentCardsProcessedNotification;
+                break;
+            case AppboyEvent.FEED_UPDATED:
+                notificationName = ABKFeedUpdatedNotification;
                 break;
             default:
                 notificationName = event as string;
