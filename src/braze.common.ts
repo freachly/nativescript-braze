@@ -25,7 +25,8 @@ export const enum NotificationSubscriptionType {
 }
 
 export const enum AppboyEvent {
-    'CONTENT_CARDS_UPDATED' = 'contentCardsUpdated'
+    'CONTENT_CARDS_UPDATED' = 'contentCardsUpdated',
+    'FEED_UPDATED' = 'feedUpdated'
 }
 
 export const enum ContentCardType {
