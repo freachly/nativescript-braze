@@ -552,12 +552,12 @@ export interface CommonBraze {
     /**
      * Launches the News Feed UI element.
      */
-    launchNewsFeed(): void;
+    launchNewsFeed(title?: string): void;
 
     /**
      * Launches the Content Cards UI element.
      */
-    launchContentCards(): void;
+    launchContentCards(title?: string): void;
 
     /**
      * Requests a refresh of the content cards from Appboy's servers.

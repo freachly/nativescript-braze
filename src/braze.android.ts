@@ -210,14 +210,14 @@ export class Braze implements CommonBraze {
         // TODO: Implement me
     }
 
-    launchNewsFeed(): void {
+    launchNewsFeed(title: string = 'News Feed'): void {
         const intent: android.content.Intent = new Intent(androidApp.foregroundActivity, com.appboy.ui.activities.AppboyFeedActivity.class);
 
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         androidApp.context.startActivity(intent);
     }
 
-    launchContentCards(): void {
+    launchContentCards(title: string = 'Content Cards'): void {
         const intent: android.content.Intent = new Intent(androidApp.foregroundActivity, com.appboy.ui.activities.AppboyContentCardsActivity.class);
 
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
