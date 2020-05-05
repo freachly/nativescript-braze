@@ -211,10 +211,9 @@ export class Braze implements CommonBraze {
         // TODO: Implement me
     }
 
-    launchNewsFeed(): void {
+    launchNewsFeed(title: string = 'News Feed'): void {
         const feedModal = ABKNewsFeedViewController.alloc().init();
-        // TODO: check why this does not work
-        feedModal.navigationItem.title = 'News';
+        feedModal.newsFeed.title = title;
 
         const keyWindow = UIApplication.sharedApplication.keyWindow;
         const mainViewController = keyWindow.rootViewController;
@@ -222,10 +221,9 @@ export class Braze implements CommonBraze {
         mainViewController.presentViewControllerAnimatedCompletion(feedModal, true, null);
     }
 
-    launchContentCards(): void {
+    launchContentCards(title: string = 'Content Cards'): void {
         const contentCardsModal = ABKContentCardsViewController.alloc().init();
-        // TODO: check why this does not work
-        contentCardsModal.navigationItem.title = 'Content Cards';
+        contentCardsModal.contentCardsViewController.title =  title;
 
         const keyWindow = UIApplication.sharedApplication.keyWindow;
         const mainViewController = keyWindow.rootViewController;
