@@ -224,6 +224,17 @@ export class Braze implements CommonBraze {
     launchContentCards(title: string = 'Content Cards'): void {
         const contentCardsModal = ABKContentCardsViewController.alloc().init();
         contentCardsModal.contentCardsViewController.title =  title;
+        console.log('========');
+        const tableView = contentCardsModal.contentCardsViewController.tableView;
+        const indexPath = contentCardsModal.contentCardsViewController.indexPathForPreferredFocusedViewInTableView(tableView);
+        const cards = contentCardsModal.contentCardsViewController.cards;
+        console.log('========');
+        console.log('tableView', tableView);
+        console.log('indexPath', indexPath);
+        console.log('cards', cards);
+
+        // const cell = ABKContentCardsTableViewController.dequeueCellFromTableViewForIndexPathForCard(tableView, indexPath, card);
+        // cell.unviewedLineColor = UIColor.Green;
 
         const keyWindow = UIApplication.sharedApplication.keyWindow;
         const mainViewController = keyWindow.rootViewController;
