@@ -214,6 +214,8 @@ export class Braze implements CommonBraze {
     launchNewsFeed(title: string = 'News Feed'): void {
         const feedModal = ABKNewsFeedViewController.alloc().init();
         feedModal.newsFeed.title = title;
+        // Override user interface style as Braze doesn't yet support dark mode on IOS
+        feedModal.newsFeed.overrideUserInterfaceStyle = 1;
 
         const keyWindow = UIApplication.sharedApplication.keyWindow;
         const mainViewController = keyWindow.rootViewController;
@@ -224,17 +226,8 @@ export class Braze implements CommonBraze {
     launchContentCards(title: string = 'Content Cards'): void {
         const contentCardsModal = ABKContentCardsViewController.alloc().init();
         contentCardsModal.contentCardsViewController.title =  title;
-        console.log('========');
-        const tableView = contentCardsModal.contentCardsViewController.tableView;
-        const indexPath = contentCardsModal.contentCardsViewController.indexPathForPreferredFocusedViewInTableView(tableView);
-        const cards = contentCardsModal.contentCardsViewController.cards;
-        console.log('========');
-        console.log('tableView', tableView);
-        console.log('indexPath', indexPath);
-        console.log('cards', cards);
-
-        // const cell = ABKContentCardsTableViewController.dequeueCellFromTableViewForIndexPathForCard(tableView, indexPath, card);
-        // cell.unviewedLineColor = UIColor.Green;
+        // Override user interface style as Braze doesn't yet support dark mode on IOS
+        contentCardsModal.contentCardsViewController.overrideUserInterfaceStyle = 1;
 
         const keyWindow = UIApplication.sharedApplication.keyWindow;
         const mainViewController = keyWindow.rootViewController;
