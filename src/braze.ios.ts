@@ -214,6 +214,8 @@ export class Braze implements CommonBraze {
     launchNewsFeed(title: string = 'News Feed'): void {
         const feedModal = ABKNewsFeedViewController.alloc().init();
         feedModal.newsFeed.title = title;
+        // Override user interface style as Braze doesn't yet support dark mode on IOS
+        feedModal.newsFeed.overrideUserInterfaceStyle = 1;
 
         const keyWindow = UIApplication.sharedApplication.keyWindow;
         const mainViewController = keyWindow.rootViewController;
@@ -224,6 +226,8 @@ export class Braze implements CommonBraze {
     launchContentCards(title: string = 'Content Cards'): void {
         const contentCardsModal = ABKContentCardsViewController.alloc().init();
         contentCardsModal.contentCardsViewController.title =  title;
+        // Override user interface style as Braze doesn't yet support dark mode on IOS
+        contentCardsModal.contentCardsViewController.overrideUserInterfaceStyle = 1;
 
         const keyWindow = UIApplication.sharedApplication.keyWindow;
         const mainViewController = keyWindow.rootViewController;
